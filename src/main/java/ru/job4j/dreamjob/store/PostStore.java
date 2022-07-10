@@ -29,4 +29,9 @@ public final class PostStore {
     public void add(Post post) {
         posts.put(post.getId(), post);
     }
+
+    public Post findById(int id) {
+        return posts.values().stream().filter(post -> post.getId() == id).findFirst().get();
+    }
+
 }
