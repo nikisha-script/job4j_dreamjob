@@ -26,4 +26,12 @@ public final class CandidateStore {
         return candidateMap.values();
     }
 
+    public void add(Candidate candidate) {
+        candidateMap.put(candidate.getId(), candidate);
+    }
+
+    public Candidate findById(int id) {
+        return candidateMap.values().stream().filter(post -> post.getId() == id).findFirst().get();
+    }
+
 }
