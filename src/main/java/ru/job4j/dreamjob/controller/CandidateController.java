@@ -10,7 +10,7 @@ public class CandidateController {
 
     private CandidateStore store = CandidateStore.getInstance();
 
-    @GetMapping(value = "/candidate")
+    @GetMapping(value = "/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", store.findAll());
         return "candidates";
