@@ -1,6 +1,5 @@
 package ru.job4j.dreamjob.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 
+
 import java.time.LocalDateTime;
 
 @Controller
 public class CandidateController {
 
-    @Autowired
-    private CandidateService store;
+    private final CandidateService store;
 
+    public CandidateController(CandidateService postService) {
+        this.store = postService;
+    }
     @GetMapping(value = "/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", store.findAll());
@@ -44,7 +46,7 @@ public class CandidateController {
 
     @PostMapping("/updateCandidate")
     public String updateCandidate(@ModelAttribute Candidate candidate) {
-        createCandidate(candidate);
+        store.update(candidate);
         return "redirect:/candidates";
     }
 

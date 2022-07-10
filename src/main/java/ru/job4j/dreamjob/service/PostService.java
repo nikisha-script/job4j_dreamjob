@@ -11,8 +11,8 @@ public class PostService {
 
     private final PostStore store;
 
-    public PostService() {
-        store = PostStore.getInstance();
+    public PostService(PostStore store) {
+        this.store = store;
     }
 
     public Collection<Post> findAll() {
@@ -25,6 +25,10 @@ public class PostService {
 
     public Post findById(int id) {
         return store.findById(id);
+    }
+
+    public void update(Post post) {
+        store.update(post);
     }
 
 }

@@ -11,8 +11,8 @@ public class CandidateService {
 
     private final CandidateStore store;
 
-    public CandidateService() {
-        store = CandidateStore.getInstance();
+    public CandidateService(CandidateStore store) {
+        this.store = store;
     }
 
     public Collection<Candidate> findAll() {
@@ -27,4 +27,7 @@ public class CandidateService {
         return store.findById(id);
     }
 
+    public void update(Candidate candidate) {
+        store.update(candidate);
+    }
 }

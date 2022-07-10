@@ -14,8 +14,11 @@ import ru.job4j.dreamjob.service.PostService;
 @Controller
 public class PostController {
 
-    @Autowired
-    private PostService store;
+    private final PostService store;
+
+    public PostController(PostService postService) {
+        this.store = postService;
+    }
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -42,7 +45,7 @@ public class PostController {
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
-        createPost(post);
+        store.update(post);
         return "redirect:/posts";
     }
 
