@@ -34,11 +34,11 @@ public final class CandidateStore {
     }
 
     public Candidate findById(int id) {
-        return candidateMap.values().stream().filter(post -> post.getId() == id).findFirst().get();
+        return candidateMap.get(id);
     }
 
     public void update(Candidate candidate) {
-        candidateMap.put(candidate.getId(), candidate);
+        candidateMap.replace(candidate.getId(), candidate);
     }
 
 }

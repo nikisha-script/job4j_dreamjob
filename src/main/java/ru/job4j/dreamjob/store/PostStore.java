@@ -34,11 +34,11 @@ public final class PostStore {
     }
 
     public Post findById(int id) {
-        return posts.values().stream().filter(post -> post.getId() == id).findFirst().get();
+        return posts.get(id);
     }
 
     public void update(Post post) {
-        posts.put(post.getId(), post);
+        posts.replace(post.getId(), post);
     }
 
 }
