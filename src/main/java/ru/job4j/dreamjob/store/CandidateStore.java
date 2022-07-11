@@ -30,6 +30,7 @@ public final class CandidateStore {
 
     public void add(Candidate candidate) {
         candidate.setId(ids.incrementAndGet());
+
         candidateMap.put(candidate.getId(), candidate);
     }
 
