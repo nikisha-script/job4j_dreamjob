@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class PostStore {
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
+
     private final AtomicInteger ids = new AtomicInteger(4);
 
     private PostStore() {
