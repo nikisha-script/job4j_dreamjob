@@ -1,9 +1,9 @@
-CREATE TABLE post (
+CREATE TABLE if not exists post (
    id SERIAL PRIMARY KEY,
    name TEXT
 );
 
-CREATE TABLE candidate (
+CREATE TABLE if not exists candidate (
    id SERIAL PRIMARY KEY,
    name TEXT
 );
