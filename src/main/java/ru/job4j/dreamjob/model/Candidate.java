@@ -26,6 +26,11 @@ public class Candidate implements Serializable {
         this.photo = photo;
     }
 
+    public Candidate(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public boolean isVisible() {
         return visible;
     }

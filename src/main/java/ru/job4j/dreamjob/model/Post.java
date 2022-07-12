@@ -23,6 +23,11 @@ public class Post implements Serializable {
         this.created = created;
     }
 
+    public Post(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public boolean isVisible() {
         return visible;
     }
