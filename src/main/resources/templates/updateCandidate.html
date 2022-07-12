@@ -39,7 +39,7 @@
                 Редактирование вакансии вакансия.
             </div>
             <div class="card-body">
-                <form th:action="@{/updateCandidate}" method="POST" th:object="${candidate}">
+                <form th:action="@{/updateCandidate}" method="POST" th:object="${candidate}" enctype="multipart/form-data">
                     <input type="hidden" name="id" th:field="*{id}"/>
                     <div class="form-group">
                         <label for="name">Имя</label>
@@ -48,6 +48,10 @@
                         <input type="text" class="form-control" name="surname" id="surname" th:field="*{surname}">
                         <label for="description">Фамилия</label>
                         <input type="text" class="form-control" name="description" id="description" th:field="*{description}">
+                        <div class="form-check">
+                               <input type="checkbox" name="visible" class="form-check-input" id="visible">
+                               <label class="form-check-label" for="visible">Удалить фото</label>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
