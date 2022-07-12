@@ -25,11 +25,6 @@ public class App {
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-        try {
-            Class.forName(cfg.getProperty("jdbc.driver"));
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
         return cfg;
     }
 

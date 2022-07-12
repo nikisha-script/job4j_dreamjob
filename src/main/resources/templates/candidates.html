@@ -65,6 +65,11 @@
                 <td th:text="${candidate.surname}" />
                 <td th:text="${candidate.description}" />
                 <td th:text="${candidate.dateOfBirth}" />
+                <td>
+                    <a th:href="@{|/deleteCandidate/${candidate.id}|}">
+                      <button type="button" class="btn btn-danger">delete</button>
+                   </a>
+                </td>
             </tr>
             </tbody>
         </table>

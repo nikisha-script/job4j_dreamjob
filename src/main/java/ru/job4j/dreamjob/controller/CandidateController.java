@@ -14,6 +14,7 @@ import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 @Controller
@@ -40,6 +41,7 @@ public class CandidateController {
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate, @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setPhoto(file.getBytes());
+        candidate.setDateOfBirth(LocalDateTime.now());
         store.add(candidate);
         return "redirect:/candidates";
     }
@@ -71,6 +73,12 @@ public class CandidateController {
     public String deletePhoto(@PathVariable("candidateId") Integer id) {
         Candidate candidate = store.findById(id);
         candidate.setPhoto(new byte[0]);
+        return "redirect:/candidates";
+    }
+
+    @GetMapping("/deleteCandidate/{candidateId}")
+    public String deleteCandidate(@PathVariable("candidateId") Integer id) {
+        store.delete(id);
         return "redirect:/candidates";
     }
 
