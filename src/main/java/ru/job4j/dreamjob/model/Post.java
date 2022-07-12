@@ -30,6 +30,4 @@ public class Post implements Serializable {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-
-
 }
