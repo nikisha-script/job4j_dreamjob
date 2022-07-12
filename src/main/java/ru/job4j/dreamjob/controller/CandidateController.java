@@ -51,7 +51,8 @@ public class CandidateController {
     }
 
     @PostMapping("/updateCandidate")
-    public String updateCandidate(@ModelAttribute Candidate candidate) {
+    public String updateCandidate(@ModelAttribute Candidate candidate, @RequestParam("file") MultipartFile file) throws IOException {
+        candidate.setPhoto(file.getBytes());
         store.update(candidate);
         return "redirect:/candidates";
     }
@@ -69,7 +70,7 @@ public class CandidateController {
     @GetMapping("/deletePhotoCandidate/{candidateId}")
     public String deletePhoto(@PathVariable("candidateId") Integer id) {
         Candidate candidate = store.findById(id);
-        candidate.setPhoto(null);
+        candidate.setPhoto(new byte[0]);
         return "redirect:/candidates";
     }
 
