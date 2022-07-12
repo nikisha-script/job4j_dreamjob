@@ -11,8 +11,6 @@ import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 
 
-import java.time.LocalDateTime;
-
 @Controller
 @ThreadSafe
 public class CandidateController {
@@ -22,6 +20,7 @@ public class CandidateController {
     public CandidateController(CandidateService postService) {
         this.store = postService;
     }
+
     @GetMapping(value = "/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", store.findAll());
@@ -29,8 +28,7 @@ public class CandidateController {
     }
 
     @GetMapping("/formAddCandidate")
-    public String addCandidate(Model model) {
-        model.addAttribute("candidate", new Candidate(0, "test", "test", LocalDateTime.now()));
+    public String addCandidate() {
         return "addCandidate";
     }
 

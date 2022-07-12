@@ -18,9 +18,9 @@ public final class CandidateStore {
     private final AtomicInteger ids = new AtomicInteger(4);
 
     private CandidateStore() {
-        candidateMap.put(1, new Candidate(1, "Danil", "Nikishin", LocalDateTime.of(1996, 2, 16, 0, 0)));
-        candidateMap.put(2, new Candidate(2, "Ivan", "Ivanov", LocalDateTime.of(1987, 2, 22, 0, 0)));
-        candidateMap.put(3, new Candidate(3, "Max", "Lebovskiy", LocalDateTime.of(2022, 5, 27, 0, 0)));
+        candidateMap.put(1, new Candidate(1, "Danil", "Nikishin", "Senior", LocalDateTime.of(1996, 2, 16, 0, 0)));
+        candidateMap.put(2, new Candidate(2, "Ivan", "Ivanov", "Junior", LocalDateTime.of(1987, 2, 22, 0, 0)));
+        candidateMap.put(3, new Candidate(3, "Max", "Lebovskiy", "Junior", LocalDateTime.of(2022, 5, 27, 0, 0)));
     }
 
 
@@ -30,7 +30,6 @@ public final class CandidateStore {
 
     public void add(Candidate candidate) {
         candidate.setId(ids.incrementAndGet());
-
         candidateMap.put(candidate.getId(), candidate);
     }
 
