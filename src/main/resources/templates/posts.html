@@ -64,6 +64,11 @@
                 <td th:text="${post.description}" />
                 <td th:text="${post.city}" />
                 <td th:text="${post.created}" />
+                <td>
+                    <a th:href="@{|/deletePost/${post.id}|}">
+                       <button type="button" class="btn btn-danger">delete</button>
+                   </a>
+                </td>
             </tr>
             </tbody>
         </table>
