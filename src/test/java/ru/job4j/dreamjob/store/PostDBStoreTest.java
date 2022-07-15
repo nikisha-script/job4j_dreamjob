@@ -8,7 +8,7 @@ import ru.job4j.dreamjob.model.Post;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-class PostDBStoreTest {
+public class PostDBStoreTest {
 
     @Test
     public void whenCreatePost() {
