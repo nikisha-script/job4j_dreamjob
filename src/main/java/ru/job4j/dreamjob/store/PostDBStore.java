@@ -34,7 +34,8 @@ public class PostDBStore {
 
     public Post add(Post post) {
         try (Connection connection = pool.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO post(name, description, created) VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO post(name, description, created) VALUES (?, ?, ?)",
+                PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, post.getName());
             statement.setString(2, post.getDescription());
             statement.setTimestamp(3, Timestamp.valueOf(post.getCreated()));
@@ -90,7 +91,10 @@ public class PostDBStore {
     }
 
     private Post createPost(ResultSet resultSet) throws SQLException {
-        return new Post(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"), resultSet.getTimestamp("created").toLocalDateTime());
+        return new Post(resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("description"),
+                resultSet.getTimestamp("created").toLocalDateTime());
     }
 
 }
