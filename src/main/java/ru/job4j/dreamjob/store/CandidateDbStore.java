@@ -19,7 +19,9 @@ public class CandidateDbStore {
 
     public Candidate add(Candidate candidate) {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img) values (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection
+                     .prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img) values (?, ?, ?, ?, ?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, candidate.getName());
             statement.setString(2, candidate.getSurname());
             statement.setString(3, candidate.getDescription());
