@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.store;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 @ThreadSafe
+@Slf4j
 public class UserDbStore {
 
     private BasicDataSource pool;
@@ -20,19 +22,20 @@ public class UserDbStore {
     public Optional<User> add(User user) {
         Optional<User> res = Optional.empty();
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO users(email, password) values (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection
+                     .prepareStatement("INSERT INTO users(email, password) values (?, ?)",
+                             PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
-            if (statement.execute()) {
-                res = Optional.of(user);
-            }
+            res = Optional.of(user);
+            statement.execute();
             try (ResultSet id = statement.getGeneratedKeys()) {
                 if (id.next()) {
                     user.setId(id.getInt(1));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return res;
     }

@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.store;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class CandidateDbStore {
 
     private BasicDataSource pool;
@@ -34,7 +36,7 @@ public class CandidateDbStore {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return candidate;
     }
@@ -45,7 +47,7 @@ public class CandidateDbStore {
             statement.setInt(1, id);
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
     }
 
@@ -58,7 +60,7 @@ public class CandidateDbStore {
             statement.setInt(3, candidate.getId());
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
     }
 
@@ -71,7 +73,7 @@ public class CandidateDbStore {
                 result.add(new Candidate(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("description"), resultSet.getTimestamp("date_of_birth").toLocalDateTime(), resultSet.getBytes("img")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return result;
     }
@@ -88,7 +90,7 @@ public class CandidateDbStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return res;
     }

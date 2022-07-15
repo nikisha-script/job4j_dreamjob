@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.store;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Post;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class PostDBStore {
 
     private final BasicDataSource pool;
@@ -27,7 +29,7 @@ public class PostDBStore {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return posts;
     }
@@ -46,7 +48,7 @@ public class PostDBStore {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return post;
     }
@@ -57,7 +59,7 @@ public class PostDBStore {
             statement.setInt(1, id);
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
     }
 
@@ -69,7 +71,7 @@ public class PostDBStore {
             statement.setInt(3, post.getId());
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
     }
 
@@ -85,7 +87,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("SQLException", e);
         }
         return res;
     }
