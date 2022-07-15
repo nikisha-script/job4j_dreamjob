@@ -1,6 +1,5 @@
 package ru.job4j.dreamjob.store;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.App;
 import ru.job4j.dreamjob.model.Candidate;
@@ -14,7 +13,6 @@ import static org.hamcrest.Matchers.is;
 public class PostDBStoreTest {
 
     @Test
-    @Ignore
     public void whenCreatePost() {
         PostDBStore store = new PostDBStore(new App().loadPool());
         Post post = new Post(0, "test", "test", LocalDateTime.now());
@@ -24,7 +22,6 @@ public class PostDBStoreTest {
     }
 
     @Test
-    @Ignore
     public void whenCreateCandidate() {
         CandidateDbStore store = new CandidateDbStore(new App().loadPool());
         Candidate candidate = new Candidate(0, "test", "test", "test", LocalDateTime.now(), new byte[0]);
