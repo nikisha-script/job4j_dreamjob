@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +40,10 @@ public class CandidateController {
     }
 
     @PostMapping("/createCandidate")
-    public String createCandidate(@ModelAttribute Candidate candidate, @RequestParam("file") MultipartFile file) throws IOException {
+    public String createCandidate(@ModelAttribute Candidate candidate, @RequestParam("file") MultipartFile file, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime, @RequestParam(value = "visible", defaultValue = "false") Boolean visible) throws IOException {
         candidate.setPhoto(file.getBytes());
-        candidate.setDateOfBirth(LocalDateTime.now());
+        candidate.setDateOfBirth(dateTime);
+        candidate.setVisible(visible);
         store.add(candidate);
         return "redirect:/candidates";
     }

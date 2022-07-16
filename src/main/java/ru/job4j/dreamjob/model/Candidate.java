@@ -17,20 +17,13 @@ public class Candidate implements Serializable {
     private boolean visible;
     private byte[] photo;
 
-    public Candidate(int id, String name, String surname, String description, LocalDateTime dateOfBirth, byte[] photo) {
+    public Candidate(int id, String name, String surname, String description, LocalDateTime dateOfBirth, byte[] photo, boolean visible) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.description = description;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
         this.visible = visible;
     }
 

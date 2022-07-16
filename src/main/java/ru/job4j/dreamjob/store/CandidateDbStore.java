@@ -22,13 +22,14 @@ public class CandidateDbStore {
     public Candidate add(Candidate candidate) {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img) values (?, ?, ?, ?, ?)",
+                     .prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img, visible) values (?, ?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, candidate.getName());
             statement.setString(2, candidate.getSurname());
             statement.setString(3, candidate.getDescription());
             statement.setTimestamp(4, Timestamp.valueOf(candidate.getDateOfBirth()));
             statement.setBytes(5, candidate.getPhoto());
+            statement.setBoolean(6, candidate.isVisible());
             statement.execute();
             try (ResultSet id = statement.getGeneratedKeys()) {
                 if (id.next()) {
@@ -57,7 +58,7 @@ public class CandidateDbStore {
             statement.setString(1, candidate.getName());
             statement.setString(2, candidate.getSurname());
             statement.setString(3, candidate.getDescription());
-            statement.setInt(3, candidate.getId());
+            statement.setInt(4, candidate.getId());
             statement.execute();
         } catch (SQLException e) {
             log.error("SQLException", e);
@@ -70,7 +71,7 @@ public class CandidateDbStore {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM candidate");
         ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                result.add(new Candidate(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("description"), resultSet.getTimestamp("date_of_birth").toLocalDateTime(), resultSet.getBytes("img")));
+                result.add(new Candidate(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("description"), resultSet.getTimestamp("date_of_birth").toLocalDateTime(), resultSet.getBytes("img"), resultSet.getBoolean("visible")));
             }
         } catch (SQLException e) {
             log.error("SQLException", e);
@@ -86,7 +87,7 @@ public class CandidateDbStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Candidate(it.getInt("id"), it.getString("name"), it.getString("surname"), it.getString("description"), it.getTimestamp("date_of_birth").toLocalDateTime(), it.getBytes("img"));
+                    return new Candidate(it.getInt("id"), it.getString("name"), it.getString("surname"), it.getString("description"), it.getTimestamp("date_of_birth").toLocalDateTime(), it.getBytes("img"), it.getBoolean("visible"));
                 }
             }
         } catch (Exception e) {
