@@ -27,13 +27,13 @@ public class UserDbStore {
                              PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
-            res = Optional.of(user);
             statement.execute();
             try (ResultSet id = statement.getGeneratedKeys()) {
                 if (id.next()) {
                     user.setId(id.getInt(1));
                 }
             }
+            res = Optional.of(user);
         } catch (SQLException e) {
             log.error("SQLException", e);
         }
