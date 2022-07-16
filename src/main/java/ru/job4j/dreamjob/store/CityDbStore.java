@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
-import ru.job4j.dreamjob.model.Post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

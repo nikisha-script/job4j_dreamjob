@@ -22,7 +22,8 @@ public class CandidateDbStore {
     public Candidate add(Candidate candidate) {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img, visible) values (?, ?, ?, ?, ?, ?)",
+                     .prepareStatement("INSERT INTO candidate(name, surname, description, date_of_birth, img, visible) "
+                                     + "values (?, ?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, candidate.getName());
             statement.setString(2, candidate.getSurname());
@@ -71,7 +72,13 @@ public class CandidateDbStore {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM candidate");
         ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                result.add(new Candidate(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getString("description"), resultSet.getTimestamp("date_of_birth").toLocalDateTime(), resultSet.getBytes("img"), resultSet.getBoolean("visible")));
+                result.add(new Candidate(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("surname"),
+                        resultSet.getString("description"),
+                        resultSet.getTimestamp("date_of_birth").toLocalDateTime(),
+                        resultSet.getBytes("img"),
+                        resultSet.getBoolean("visible")));
             }
         } catch (SQLException e) {
             log.error("SQLException", e);
@@ -87,7 +94,13 @@ public class CandidateDbStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new Candidate(it.getInt("id"), it.getString("name"), it.getString("surname"), it.getString("description"), it.getTimestamp("date_of_birth").toLocalDateTime(), it.getBytes("img"), it.getBoolean("visible"));
+                    return new Candidate(it.getInt("id"),
+                            it.getString("name"),
+                            it.getString("surname"),
+                            it.getString("description"),
+                            it.getTimestamp("date_of_birth").toLocalDateTime(),
+                            it.getBytes("img"),
+                            it.getBoolean("visible"));
                 }
             }
         } catch (Exception e) {

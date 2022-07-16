@@ -40,7 +40,10 @@ public class CandidateController {
     }
 
     @PostMapping("/createCandidate")
-    public String createCandidate(@ModelAttribute Candidate candidate, @RequestParam("file") MultipartFile file, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime, @RequestParam(value = "visible", defaultValue = "false") Boolean visible) throws IOException {
+    public String createCandidate(@ModelAttribute Candidate candidate,
+                                  @RequestParam("file") MultipartFile file,
+                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
+                                  @RequestParam(value = "visible", defaultValue = "false") Boolean visible) throws IOException {
         candidate.setPhoto(file.getBytes());
         candidate.setDateOfBirth(dateTime);
         candidate.setVisible(visible);
