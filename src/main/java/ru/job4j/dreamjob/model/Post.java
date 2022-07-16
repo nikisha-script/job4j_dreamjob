@@ -14,21 +14,15 @@ public class Post implements Serializable {
     private String description;
     private LocalDateTime created;
     private boolean visible;
-    private City city;
+    private int idCity;
 
-    public Post(int id, String name, String description, LocalDateTime created) {
+    public Post(int id, String name, String description, LocalDateTime created, boolean visible, int idCity) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
-    }
-
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
         this.visible = visible;
+        this.idCity = idCity;
     }
+
 }

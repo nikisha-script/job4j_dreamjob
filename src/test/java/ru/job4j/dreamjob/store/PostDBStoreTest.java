@@ -15,7 +15,7 @@ public class PostDBStoreTest {
     @Test
     public void whenCreatePost() {
         PostDBStore store = new PostDBStore(new App().loadPool());
-        Post post = new Post(0, "test", "test", LocalDateTime.now());
+        Post post = new Post(0, "test", "test", LocalDateTime.now(), true, 1);
         store.add(post);
         Post postInDb = store.findById(post.getId());
         assertThat(postInDb.getName(), is(post.getName()));
@@ -24,7 +24,7 @@ public class PostDBStoreTest {
     @Test
     public void whenCreateCandidate() {
         CandidateDbStore store = new CandidateDbStore(new App().loadPool());
-        Candidate candidate = new Candidate(0, "test", "test", "test", LocalDateTime.now(), new byte[0]);
+        Candidate candidate = new Candidate(0, "test", "test", "test", LocalDateTime.now(), new byte[0], true);
         store.add(candidate);
         Candidate candidateInDB = store.findById(candidate.getId());
         assertThat(candidateInDB.getName(), is(candidate.getName()));

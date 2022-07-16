@@ -1,16 +1,15 @@
 package ru.job4j.dreamjob.controller;
 
 import net.jcip.annotations.ThreadSafe;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
+import ru.job4j.dreamjob.store.PostDBStore;
 
 import java.time.LocalDateTime;
 
@@ -40,10 +39,12 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
-        City city = cityService.findById(post.getCity().getId());
-        post.setCity(city);
+    public String createPost(@ModelAttribute Post post,
+                             @RequestParam(value = "visible", defaultValue = "false") boolean visible,
+                             @RequestParam("city.id") int idCity) {
         post.setCreated(LocalDateTime.now());
+        post.setVisible(visible);
+        post.setIdCity(idCity);
         store.add(post);
         return "redirect:/posts";
     }
@@ -66,5 +67,6 @@ public class PostController {
         store.delete(id);
         return "redirect:/posts";
     }
+
 
 }
