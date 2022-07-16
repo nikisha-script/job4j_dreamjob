@@ -67,10 +67,12 @@ public class PostDBStore {
 
     public void update(Post post) {
         try (Connection connection = pool.getConnection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE post set name = ?, description = ? where id = ?")) {
+        PreparedStatement statement = connection.prepareStatement("UPDATE post set name = ?, description = ?, visible = ?, city = ? where id = ?")) {
             statement.setString(1, post.getName());
             statement.setString(2, post.getDescription());
-            statement.setInt(3, post.getId());
+            statement.setBoolean(3, post.isVisible());
+            statement.setInt(4, post.getIdCity());
+            statement.setInt(5, post.getId());
             statement.execute();
         } catch (SQLException e) {
             log.error("SQLException", e);

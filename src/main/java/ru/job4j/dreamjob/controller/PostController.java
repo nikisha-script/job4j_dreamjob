@@ -57,7 +57,11 @@ public class PostController {
     }
 
     @PostMapping("/updatePost")
-    public String updatePost(@ModelAttribute Post post) {
+    public String updatePost(@ModelAttribute Post post,
+                             @RequestParam(value = "visible", defaultValue = "false") boolean visible,
+                             @RequestParam("city.id") int idCity) {
+        post.setVisible(visible);
+        post.setIdCity(idCity);
         store.update(post);
         return "redirect:/posts";
     }
