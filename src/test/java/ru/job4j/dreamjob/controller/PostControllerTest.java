@@ -29,8 +29,8 @@ public class PostControllerTest {
         Model model = mock(Model.class);
         HttpSession session = mock(HttpSession.class);
         PostService postService = mock(PostService.class);
-        when(postService.findAll()).thenReturn(posts);
         CityService cityService = mock(CityService.class);
+        when(postService.findAll()).thenReturn(posts);
         PostController postController = new PostController(
                 postService,
                 cityService
