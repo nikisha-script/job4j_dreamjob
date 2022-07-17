@@ -22,4 +22,8 @@ public class UserService {
         return store.add(user);
     }
 
+    public Optional<User> findUserByEmailAndPwd(User user) {
+        return store.findUserByEmailAndPwd(user);
+    }
+
 }

@@ -40,6 +40,23 @@ public class UserDbStore {
         return res;
     }
 
+    public Optional<User> findUserByEmailAndPwd(User user) {
+        Optional<User> res = Optional.empty();
+        try (Connection connection = pool.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users where email = ? and password = ?")) {
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    res = Optional.of(user);
+                }
+            }
+        } catch (SQLException e) {
+            log.error("SQLException", e);
+        }
+        return res;
+    }
+
 
 
 }
