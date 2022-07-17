@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
-import ru.job4j.dreamjob.store.PasswordFilter;
+import ru.job4j.dreamjob.filter.PasswordFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

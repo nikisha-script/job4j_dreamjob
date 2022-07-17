@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dreamjob.filter.PasswordFilter;
 import ru.job4j.dreamjob.model.User;
 
 

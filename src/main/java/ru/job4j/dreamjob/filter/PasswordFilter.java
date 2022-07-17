@@ -1,4 +1,4 @@
-package ru.job4j.dreamjob.store;
+package ru.job4j.dreamjob.filter;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
