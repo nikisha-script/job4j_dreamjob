@@ -30,6 +30,14 @@
                 <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
                 <a class="nav-item nav-link active" th:href="@{/addPost}">Добавить вакансию</a>
                 <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                <a class="nav-item nav-link" th:if="${user.email == 'Guest'}" th:href="@{/loginPage}">
+                        <span th:text="${user.email}"></span>
+                        <span> | Войти</span>
+                </a>
+                <a class="nav-item nav-link" th:if="${user.email != 'Guest'}" th:href="@{/logout}">
+                        <span th:text="${user.email}"></span>
+                        <span> | Выйти</span>
+                </a>
             </div>
         </div>
     </nav>

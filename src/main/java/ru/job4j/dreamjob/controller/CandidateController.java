@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -29,13 +30,15 @@ public class CandidateController {
     }
 
     @GetMapping(value = "/candidates")
-    public String candidates(Model model) {
+    public String candidates(Model model, HttpSession session) {
+        MySession.getSession(model, session);
         model.addAttribute("candidates", store.findAll());
         return "candidates";
     }
 
     @GetMapping("/formAddCandidate")
-    public String addCandidate() {
+    public String addCandidate(Model model, HttpSession session) {
+        MySession.getSession(model, session);
         return "addCandidate";
     }
 
@@ -52,7 +55,8 @@ public class CandidateController {
     }
 
     @GetMapping("/formUpdateCandidate/{candidateId}")
-    public String formUpdateCandidate(Model model, @PathVariable("candidateId") int id) {
+    public String formUpdateCandidate(Model model, @PathVariable("candidateId") int id, HttpSession session) {
+        MySession.getSession(model, session);
         model.addAttribute("candidate", store.findById(id));
         return "updateCandidate";
     }
@@ -86,5 +90,7 @@ public class CandidateController {
         store.delete(id);
         return "redirect:/candidates";
     }
+
+
 
 }
